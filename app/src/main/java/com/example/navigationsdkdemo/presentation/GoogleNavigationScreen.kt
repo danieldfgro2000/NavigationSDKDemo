@@ -16,12 +16,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import com.example.navigationsdkdemo.util.PermissionRequester
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GoogleNavigationScreen() {
 
+    val context = LocalContext.current
+//    NavigationApi
     val isNavigationPermissionGranted = remember { mutableStateOf(false) }
 
     PermissionRequester(
@@ -46,7 +50,7 @@ fun GoogleNavigationScreen() {
         topBar = {
             TopAppBar(
                 modifier = Modifier.wrapContentHeight(),
-                title = { Text("NavigationSDK") }) // Top bar
+                title = { Text("Google Maps NavigationSDK") }) // Top bar
         },
         content = { paddingValues ->
             Box(

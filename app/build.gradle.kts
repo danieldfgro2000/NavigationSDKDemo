@@ -52,10 +52,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    implementation(libs.compose.navigation)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.ui)
-    implementation(libs.navigation.dynamic.features.fragment)
+    api(libs.google.navigation)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito.android)
