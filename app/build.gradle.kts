@@ -1,5 +1,3 @@
-import com.google.android.libraries.mapsplatform.secrets_gradle_plugin.SecretsPluginExtension.Companion.defaultPropertiesFile
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -60,6 +58,8 @@ dependencies {
     implementation(libs.navigation.dynamic.features.fragment)
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.android)
+    androidTestImplementation(libs.mockito.android)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -72,5 +72,6 @@ dependencies {
 }
 
 secrets {
-    defaultPropertiesFileName  =  ("local.defaults.properties")
+    propertiesFileName = "secrets.properties"
+    defaultPropertiesFileName  = "local.defaults.properties"
 }
