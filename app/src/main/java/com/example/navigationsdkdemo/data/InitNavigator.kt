@@ -5,17 +5,17 @@ import com.example.navigationsdkdemo.MainActivity
 import com.example.navigationsdkdemo.util.displayMessage
 import com.google.android.libraries.navigation.NavigationApi
 import com.google.android.libraries.navigation.Navigator
-import com.google.android.libraries.navigation.SupportNavigationFragment
 
 fun initNavigator(context: Context, onNavReady: (Navigator?) -> Unit) {
     NavigationApi.getNavigator(
         context as MainActivity,
         object : NavigationApi.NavigatorListener {
             override fun onNavigatorReady(p0: Navigator?) {
-
                 displayMessage("Navigator ready", context)
                 onNavReady(p0)
                 p0?.setTaskRemovedBehavior(Navigator.TaskRemovedBehavior.QUIT_SERVICE)
+
+
             }
 
             override fun onError(p0: Int) {
@@ -52,15 +52,5 @@ fun initNavigator(context: Context, onNavReady: (Navigator?) -> Unit) {
             }
         }
     )
-    withMapAsync {
 
-    }
-}
-private fun withMapAsync(block: InitializeMapScope.() -> Unit) {
-    SupportNavigationFragment().getMapAsync { map ->
-        object : InitializeMapScope {
-            override val map = map
-        }
-            .block()
-    }
 }

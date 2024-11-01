@@ -1,37 +1,38 @@
 package com.example.navigationsdkdemo.presentation.widget
 
+import android.app.Application
 import android.content.Context
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import android.util.Log
 import com.example.navigationsdkdemo.util.displayMessage
+import com.google.android.libraries.navigation.ArrivalEvent
 import com.google.android.libraries.navigation.ListenableResultFuture
+import com.google.android.libraries.navigation.NavigationApi
 import com.google.android.libraries.navigation.Navigator
 import com.google.android.libraries.navigation.Navigator.RouteStatus.NETWORK_ERROR
 import com.google.android.libraries.navigation.Navigator.RouteStatus.NO_ROUTE_FOUND
 import com.google.android.libraries.navigation.Navigator.RouteStatus.OK
 import com.google.android.libraries.navigation.Navigator.RouteStatus.ROUTE_CANCELED
+import com.google.android.libraries.navigation.RoadSnappedLocationProvider
 import com.google.android.libraries.navigation.RoutingOptions
 import com.google.android.libraries.navigation.SimulationOptions
 import com.google.android.libraries.navigation.Waypoint
-import com.google.firebase.encoders.json.BuildConfig
 
-@Composable
-fun NavigateToPlace(
+fun navigateToPlace(
     context: Context,
-    mNavigator: Navigator,
+    navigator: Navigator,
     placeId: String,
     travelModel: RoutingOptions
 ) {
     var destination: Waypoint
     try {
         destination = Waypoint.Builder().setPlaceIdString(placeId).build()
-    } catch (e: IllegalArgumentException) {
-        displayMessage("Invalid place ID", LocalContext.current)
+    } catch (e: Waypoint.UnsupportedPlaceIdException) {
+        Log.d("Invalid place ID", e.message.toString())
         return
     }
 
     val pendingRoute: ListenableResultFuture<Navigator.RouteStatus> =
-        mNavigator.setDestination(destination, travelModel)
+        navigator.setDestination(destination, travelModel)
 
     pendingRoute.setOnResultListener(object :
         ListenableResultFuture.OnResultListener<Navigator.RouteStatus> {
@@ -39,14 +40,14 @@ fun NavigateToPlace(
             when (result) {
                 OK -> {
                     // hide action bar to maximize the navigationUI
-                    mNavigator.setAudioGuidance(Navigator.AudioGuidance.VOICE_ALERTS_AND_GUIDANCE)
+                    navigator.setAudioGuidance(Navigator.AudioGuidance.VOICE_ALERTS_AND_GUIDANCE)
 
-                    if (BuildConfig.DEBUG) {
-                        mNavigator.simulator.simulateLocationsAlongExistingRoute(
+                    if (true) {
+                        navigator.simulator.simulateLocationsAlongExistingRoute(
                             SimulationOptions().speedMultiplier(5.0F)
                         )
                     }
-                    mNavigator.startGuidance()
+                    navigator.startGuidance()
                 }
 
                 NO_ROUTE_FOUND -> {
@@ -65,6 +66,18 @@ fun NavigateToPlace(
                     displayMessage("Error Starting navigation ${result.name}", context)
                 }
             }
+        }
+    })
+
+
+
+    val application = context.applicationContext
+    val mRoadSnappedLocationProvider =
+        NavigationApi.getRoadSnappedLocationProvider(application as Application?)
+    mRoadSnappedLocationProvider.addLocationListener(object :
+        RoadSnappedLocationProvider.LocationListener {
+        override fun onLocationChanged(p0: android.location.Location?) {
+//            displayMessage("Location changed", context)
         }
     })
 }
