@@ -1,8 +1,7 @@
 package com.example.navigationsdkdemo.presentation.widget
 
 import android.content.Context
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import android.util.Log
 import com.example.navigationsdkdemo.util.displayMessage
 import com.google.android.libraries.navigation.ListenableResultFuture
 import com.google.android.libraries.navigation.Navigator
@@ -15,8 +14,7 @@ import com.google.android.libraries.navigation.SimulationOptions
 import com.google.android.libraries.navigation.Waypoint
 import com.google.firebase.encoders.json.BuildConfig
 
-@Composable
-fun NavigateToPlace(
+fun navigateToPlace(
     context: Context,
     mNavigator: Navigator,
     placeId: String,
@@ -25,8 +23,9 @@ fun NavigateToPlace(
     var destination: Waypoint
     try {
         destination = Waypoint.Builder().setPlaceIdString(placeId).build()
-    } catch (e: IllegalArgumentException) {
-        displayMessage("Invalid place ID", LocalContext.current)
+        Log.d("Destination", destination.toString())
+    } catch (e: Waypoint.UnsupportedPlaceIdException) {
+        Log.d("Invalid place ID", e.message.toString())
         return
     }
 

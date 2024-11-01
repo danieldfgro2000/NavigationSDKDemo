@@ -2,9 +2,11 @@ package com.example.navigationsdkdemo.data
 
 import android.content.Context
 import com.example.navigationsdkdemo.MainActivity
+import com.example.navigationsdkdemo.presentation.widget.navigateToPlace
 import com.example.navigationsdkdemo.util.displayMessage
 import com.google.android.libraries.navigation.NavigationApi
 import com.google.android.libraries.navigation.Navigator
+import com.google.android.libraries.navigation.RoutingOptions
 import com.google.android.libraries.navigation.SupportNavigationFragment
 
 fun initNavigator(context: Context, onNavReady: (Navigator?) -> Unit) {
@@ -12,10 +14,20 @@ fun initNavigator(context: Context, onNavReady: (Navigator?) -> Unit) {
         context as MainActivity,
         object : NavigationApi.NavigatorListener {
             override fun onNavigatorReady(p0: Navigator?) {
-
                 displayMessage("Navigator ready", context)
                 onNavReady(p0)
                 p0?.setTaskRemovedBehavior(Navigator.TaskRemovedBehavior.QUIT_SERVICE)
+                val mRoutingOptions = RoutingOptions()
+                mRoutingOptions.travelMode(RoutingOptions.TravelMode.WALKING)
+                p0?.let { navigator ->
+                    navigateToPlace(
+                        context = context,
+                        mNavigator = navigator,
+                        placeId = "EilTdHJhZGEgQXVyZWwgVmxhaWN1LCBDbHVqLU5hcG9jYSwgUm9tYW5pYSIuKiwKFAoSCTcjQYANDElHEautzCPPyTsvEhQKEgmLC2yRHwxJRxGLFB8zHGC8Cw",
+                        travelModel = mRoutingOptions
+                    )
+                }
+
             }
 
             override fun onError(p0: Int) {
