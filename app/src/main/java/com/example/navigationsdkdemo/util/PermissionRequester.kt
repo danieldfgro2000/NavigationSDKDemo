@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun PermissionRequester(
-    requestNavigationPermissions: Boolean = false,
+    shouldRequestNavigationPermissions: Boolean = false,
     onNavigationPermissionsGranted: () -> Unit = {},
     permissionLauncher: ActivityResultLauncher<Array<String>>? = null
 ) {
@@ -21,7 +21,7 @@ fun PermissionRequester(
     )
 
     val permissionsToRequest = remember {
-        if (requestNavigationPermissions) {
+        if (shouldRequestNavigationPermissions) {
             navigationPermissions
         } else {
             emptyArray()
