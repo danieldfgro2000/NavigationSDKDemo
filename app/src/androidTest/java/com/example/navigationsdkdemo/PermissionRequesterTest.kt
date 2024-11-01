@@ -29,7 +29,7 @@ class PermissionRequesterTest {
 
         composeTestRule.setContent {
             PermissionRequester(
-                requestNavigationPermissions = true,
+                shouldRequestNavigationPermissions = true,
                 onNavigationPermissionsGranted = onPermissionsGrantedMock,
                 permissionLauncher = mockLauncher
             )
@@ -45,7 +45,7 @@ class PermissionRequesterTest {
 
         composeTestRule.setContent {
             PermissionRequester(
-                requestNavigationPermissions = true
+                shouldRequestNavigationPermissions = true
             )
         }
 

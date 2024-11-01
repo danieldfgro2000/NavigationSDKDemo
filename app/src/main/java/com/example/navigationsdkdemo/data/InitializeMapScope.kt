@@ -1,5 +1,7 @@
 package com.example.navigationsdkdemo.data
 
-//interface InitializeMapScope {
-//    val map: GoogleMap
-//}
+import com.google.android.gms.maps.GoogleMap
+
+interface InitializeMapScope {
+    val map: GoogleMap
+}
