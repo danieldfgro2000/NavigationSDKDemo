@@ -22,6 +22,7 @@ import androidx.lifecycle.Lifecycle.Event.ON_START
 import androidx.lifecycle.Lifecycle.Event.ON_STOP
 import androidx.lifecycle.LifecycleEventObserver
 import com.example.navigationsdkdemo.data.initNavigator
+import com.example.navigationsdkdemo.presentation.widget.PaymentDialog
 import com.example.navigationsdkdemo.presentation.widget.PermissionsNotGranted
 import com.example.navigationsdkdemo.presentation.widget.TopBarCustom
 import com.example.navigationsdkdemo.presentation.widget.navigateToPlace
@@ -34,6 +35,7 @@ import com.google.android.libraries.navigation.RoutingOptions
 @Composable
 fun GoogleNavigationScreen() {
     val isNavigationPermissionGranted = remember { mutableStateOf(false) }
+
 
     PermissionRequester(
         shouldRequestNavigationPermissions = !isNavigationPermissionGranted.value,
@@ -60,6 +62,8 @@ fun NavigationContent(paddingValues: PaddingValues) {
     val isNavigationReady = remember { mutableStateOf(false) }
     val mNavigator = remember { mutableStateOf<Navigator?>(null) }
 
+    val showPaymentDialog = remember { mutableStateOf(false) }
+
     initNavigator(context = context,
         onNavReady = { navigator ->
             isNavigationReady.value = navigator != null
@@ -71,7 +75,10 @@ fun NavigationContent(paddingValues: PaddingValues) {
                     context = context,
                     navigator = it,
                     placeId = "EilTdHJhZGEgQXVyZWwgVmxhaWN1LCBDbHVqLU5hcG9jYSwgUm9tYW5pYSIuKiwKFAoSCTcjQYANDElHEautzCPPyTsvEhQKEgmLC2yRHwxJRxGLFB8zHGC8Cw",
-                    travelModel = mRoutingOptions
+                    travelModel = mRoutingOptions,
+                    onArrival = {
+                       showPaymentDialog.value = true
+                    }
                 )
             }
         })
@@ -82,6 +89,7 @@ fun NavigationContent(paddingValues: PaddingValues) {
             .padding(paddingValues),
         contentAlignment = Alignment.Center
     ) {
+
         AndroidView(
             factory = { context ->
                 NavigationView(context)
@@ -103,5 +111,12 @@ fun NavigationContent(paddingValues: PaddingValues) {
                 lifecycleOwner.lifecycle.addObserver(lifecycleObserver)
             }
         )
+        if (showPaymentDialog.value) {
+            PaymentDialog(
+                onDismiss = {
+                    showPaymentDialog.value = false
+                }
+            )
+        }
     }
 }
