@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.androidx.material3)
 
     api(libs.google.navigation)
+    implementation(libs.ayden.checkout)
+    implementation(libs.volley)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito.android)
@@ -80,4 +82,9 @@ dependencies {
 secrets {
     propertiesFileName = "secrets.properties"
     defaultPropertiesFileName  = "local.defaults.properties"
+}
+
+android.applicationVariants.all { variant ->
+    android.defaultConfig.buildConfigField ("String", "SERVER_URL", "\"https://example.com\"")
+    true
 }

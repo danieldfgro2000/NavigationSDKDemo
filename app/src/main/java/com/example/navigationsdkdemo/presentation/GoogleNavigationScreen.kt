@@ -75,6 +75,7 @@ fun NavigationContent(paddingValues: PaddingValues) {
                     context = context,
                     navigator = it,
                     placeId = "EilTdHJhZGEgQXVyZWwgVmxhaWN1LCBDbHVqLU5hcG9jYSwgUm9tYW5pYSIuKiwKFAoSCTcjQYANDElHEautzCPPyTsvEhQKEgmLC2yRHwxJRxGLFB8zHGC8Cw",
+//                    placeId = " ChIJj_dsormBtIYRw5MzGTTsbRs",
                     travelModel = mRoutingOptions,
                     onArrival = {
                        showPaymentDialog.value = true

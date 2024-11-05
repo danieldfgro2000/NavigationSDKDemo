@@ -2,8 +2,8 @@ package com.example.navigationsdkdemo.presentation.widget
 
 import android.content.Context
 import android.util.Log
+import androidx.viewbinding.BuildConfig
 import com.example.navigationsdkdemo.util.displayMessage
-import com.google.android.datatransport.BuildConfig
 import com.google.android.libraries.navigation.ArrivalEvent
 import com.google.android.libraries.navigation.ListenableResultFuture
 import com.google.android.libraries.navigation.Navigator
@@ -41,8 +41,6 @@ fun navigateToPlace(
     val pendingRoute: ListenableResultFuture<Navigator.RouteStatus> =
         navigator.setDestination(destination, travelModel)
 
-
-
     pendingRoute.setOnResultListener(object :
         ListenableResultFuture.OnResultListener<Navigator.RouteStatus> {
         override fun onResult(result: Navigator.RouteStatus) {
@@ -53,7 +51,7 @@ fun navigateToPlace(
 
                     if (BuildConfig.DEBUG) {
                         navigator.simulator.simulateLocationsAlongExistingRoute(
-                            SimulationOptions().speedMultiplier(5.0F)
+                            SimulationOptions().speedMultiplier(15.0F)
                         )
                     }
                     navigator.addArrivalListener(arrivalListener)
