@@ -36,7 +36,7 @@ class CheckOutApiService {
     }
 
     private val baseURL: String by lazy {
-        "https://checkoutshopper-test.adyen.com/checkoutshopper/demo"
+        "https://checkout-test.adyen.com/v68"
     }
 
     fun <T> addToRequestQueue(req: Request<T>) {

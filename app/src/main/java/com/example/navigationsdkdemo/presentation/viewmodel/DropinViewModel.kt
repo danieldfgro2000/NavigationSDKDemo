@@ -1,0 +1,71 @@
+package com.example.navigationsdkdemo.presentation.viewmodel
+
+import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.adyen.checkout.card.CardConfiguration
+import com.adyen.checkout.components.model.PaymentMethodsApiResponse
+import com.adyen.checkout.components.model.payments.Amount
+import com.adyen.checkout.core.api.Environment
+import com.adyen.checkout.dropin.DropInConfiguration
+import com.example.navigationsdkdemo.data.service.ayden.CheckOutApiService
+import com.example.navigationsdkdemo.data.service.ayden.DropinService
+import java.util.Locale
+
+class DropinViewModel(private val checkOutApiService: CheckOutApiService) : ViewModel() {
+    private var shopperLocale = Locale.ENGLISH
+    val paymentMethodsResponseData: MutableLiveData<PaymentMethodsApiResponse> = MutableLiveData()
+    val dropinConfigData: MutableLiveData<DropInConfiguration> = MutableLiveData()
+    val errorMsgData: MutableLiveData<String> = MutableLiveData()
+
+    fun fetchPaymentMethods() {
+        checkOutApiService.getPaymentMethods(
+            {
+                paymentMethodsResponseData.value =
+                    PaymentMethodsApiResponse.SERIALIZER.deserialize(it)
+            }, {
+                errorMsgData.value = "Error getting payment methods! $it"
+            })
+    }
+
+    fun fetchDropinConfig(ctx: Context) {
+        checkOutApiService.getConfig({
+            val cardConfiguration =
+                CardConfiguration.Builder(ctx, it.getString("clientPublicKey"))
+                    .setHolderNameRequired(true)
+                    .setShopperLocale(shopperLocale)
+                    .build()
+            val amount = Amount()
+            // Optional. In this example, the Pay button will display 10 EUR.
+            amount.currency = "EUR"
+            amount.value = 1000
+
+            dropinConfigData.value =
+                DropInConfiguration.Builder(
+                    ctx,
+                    DropinService::class.java,
+                    it.getString("clientPublicKey")
+                )
+                    // Optional. Use if you want to display the amount and currency on the Pay button.
+                    .setAmount(amount)
+                    // When you're ready to accept live payments, change the value to one of our live environments.
+                    .setEnvironment(Environment.TEST)
+                    // Optional. Use to set the language rendered in Drop-in, overriding the default device language setting. See list of Supported languages at https://github.com/Adyen/adyen-android/tree/master/card-ui-core/src/main/res
+                    // Make sure that you have set the locale in the payment method configuration object as well.
+                    .setShopperLocale(shopperLocale)
+                    .addCardConfiguration(cardConfiguration)
+                    .build()
+        }, {
+            errorMsgData.value = "Error getting config! $it"
+        })
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+class DropinViewModelFactory(private val checkOutApiService: CheckOutApiService) :
+    ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return DropinViewModel(checkOutApiService) as T
+    }
+}

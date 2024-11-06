@@ -59,9 +59,16 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    // ayden
     api(libs.google.navigation)
     implementation(libs.ayden.checkout)
+    implementation(libs.ayden.checkout.card)
+    implementation(libs.ayden.checkout.components)
     implementation(libs.volley)
+
+    // stripe
+    implementation(libs.stripe)
+    implementation(libs.stripe.android)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito.android)

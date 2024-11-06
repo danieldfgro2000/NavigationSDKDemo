@@ -1,7 +1,7 @@
 [versions]
 agp = "8.7.2"
 annotation = "1.9.1"
-ayden_checkout_version = "4.10.0"
+ayden_checkout_version = "5.7.0"
 desugar_jdk_libs_nio = "2.1.2"
 kotlin = "2.0.20"
 coreKtx = "1.13.1"
@@ -16,6 +16,8 @@ google_navigation_version = "6.0.0"
 mapsplatform_secrets = "2.0.1"
 mockito_version = "5.14.2"
 volley_version = "1.2.1"
+stripe_version = "24.23.0"
+stripe_android_version = "20.41.1"
 
 [libraries]
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
@@ -35,8 +37,13 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
-ayden-checkout = { group = "com.adyen.checkout", name = "drop-in", version.ref = "ayden_checkout_version" }
+ayden-checkout = { group = "com.adyen.checkout", name = "drop-in-compose", version.ref = "ayden_checkout_version" }
+ayden-checkout-card = { group = "com.adyen.checkout", name = "card", version.ref = "ayden_checkout_version" }
+ayden-checkout-components = { group = "com.adyen.checkout", name = "components-compose", version.ref = "ayden_checkout_version" }
 volley = { group = "com.android.volley", name = "volley", version.ref = "volley_version" }
+
+stripe = { group = "com.stripe", name = "stripe-java", version.ref = "stripe_version" }
+stripe-android = { group = "com.stripe", name = "stripe-android", version.ref = "stripe_android_version" }
 
 google-navigation = { group = "com.google.android.libraries.navigation", name = "navigation", version.ref = "google_navigation_version" }
 
