@@ -11,7 +11,7 @@ import com.stripe.param.SetupIntentCreateParams
 internal class ApiEndpoints: Api {
 
     init {
-        Stripe.apiKey = "sk_test_51P1lxIDynBaWKZZ4bowmmKw86keF2ylIMkGa9HgUi2GQpDoIBIZedF3cGOayEFpBAHDYBzuQXM02YuXFSrQuvyBg00762FTqV4"
+        Stripe.apiKey = "STRIPE_KEY"
     }
 
     override suspend fun login(user: String, psw: String): String? {
