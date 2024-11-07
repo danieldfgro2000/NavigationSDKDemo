@@ -1,4 +1,4 @@
-package com.example.navigationsdkdemo.data.service.ayden
+package com.example.navigationsdkdemo.data.remote.ayden
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable

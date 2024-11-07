@@ -1,7 +1,7 @@
-package com.example.navigationsdkdemo.data.service.ayden
+package com.example.navigationsdkdemo.data.remote.ayden
 
 
-import com.adyen.checkout.components.model.paymentmethods.PaymentMethod
+import com.adyen.checkout.components.core.PaymentMethod
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response

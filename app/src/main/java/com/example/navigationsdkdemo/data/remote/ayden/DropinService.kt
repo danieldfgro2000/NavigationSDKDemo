@@ -1,4 +1,4 @@
-package com.example.navigationsdkdemo.data.service.ayden
+package com.example.navigationsdkdemo.data.remote.ayden
 import com.adyen.checkout.components.core.ActionComponentData
 import com.adyen.checkout.components.core.PaymentComponentState
 import com.adyen.checkout.dropin.DropInService

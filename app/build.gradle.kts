@@ -52,6 +52,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -69,6 +70,12 @@ dependencies {
     // stripe
     implementation(libs.stripe)
     implementation(libs.stripe.android)
+
+    implementation(project(":stripe"))
+    implementation(libs.gson)
+    implementation(libs.gson.converter)
+    implementation(libs.retrofit)
+    implementation(libs.logging.interceptor)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito.android)
