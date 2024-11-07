@@ -13,20 +13,29 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.navigationsdkdemo.presentation.viewmodel.PaymentViewModel
 
 @Composable
 fun PaymentDialog(
     title: String = "Payment Dialog",
-    description: String = "Payment processing goes here",
+    description: String? = null,
     confirmText: String = "Confirm",
     dismissText: String = "Dismiss",
     onConfirm: () -> Unit = {},
     onDismiss: () -> Unit = {}
 ) {
+
+    val viewModel: PaymentViewModel = viewModel()
+
+    val descriptionText = viewModel.descriptionText.collectAsState()
+    val showProgress = viewModel.showProgress.collectAsState()
+
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
     Column(
@@ -43,12 +52,24 @@ fun PaymentDialog(
             text = title,
             style = MaterialTheme.typography.labelLarge
         )
-        Text(
-            modifier = Modifier.padding(8.dp),
-            color = MaterialTheme.colorScheme.onSurface,
-            text = description,
-            style = MaterialTheme.typography.labelMedium
-        )
+
+        if (showProgress.value) {
+            Text(
+                modifier = Modifier.padding(8.dp),
+                color = MaterialTheme.colorScheme.onSurface,
+                text = "Processing payment...",
+                style = MaterialTheme.typography.labelMedium
+            )
+
+        } else {
+            Text(
+                modifier = Modifier.padding(8.dp),
+                color = MaterialTheme.colorScheme.onSurface,
+                text = description ?: descriptionText.value,
+                style = MaterialTheme.typography.labelMedium
+            )
+        }
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
@@ -57,7 +78,10 @@ fun PaymentDialog(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.surfaceContainer
                 ),
-                onClick = { onConfirm() }) {
+                onClick = {
+                    viewModel.pay()
+                    onConfirm()
+                }) {
                 Text(
                     color = MaterialTheme.colorScheme.onSurface,
                     text = confirmText

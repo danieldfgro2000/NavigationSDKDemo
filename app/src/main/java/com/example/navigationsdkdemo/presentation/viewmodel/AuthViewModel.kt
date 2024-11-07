@@ -55,6 +55,7 @@ class AuthViewModel(
                 pref.saveFavouritePaymentMethodId(paymentId)
             }.onFailure {
                 _displayError.value = true
+                _errorMessage.value = it.message ?: ""
             }
         }
     }

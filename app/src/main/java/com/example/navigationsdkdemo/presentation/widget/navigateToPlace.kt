@@ -2,6 +2,7 @@ package com.example.navigationsdkdemo.presentation.widget
 
 import android.content.Context
 import android.util.Log
+import com.example.navigationsdkdemo.BuildConfig
 import com.example.navigationsdkdemo.util.displayMessage
 import com.google.android.libraries.navigation.ArrivalEvent
 import com.google.android.libraries.navigation.ListenableResultFuture
@@ -48,7 +49,7 @@ fun navigateToPlace(
                     // hide action bar to maximize the navigationUI
                     navigator.setAudioGuidance(Navigator.AudioGuidance.VOICE_ALERTS_AND_GUIDANCE)
 
-                    if (true) {
+                    if (BuildConfig.DEBUG) {
                         navigator.simulator.simulateLocationsAlongExistingRoute(
                             SimulationOptions().speedMultiplier(15.0F)
                         )
