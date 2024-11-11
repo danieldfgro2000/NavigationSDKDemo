@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "NavigationSDKDemo"
 include(":app")
-include(":stripe")

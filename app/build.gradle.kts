@@ -89,7 +89,6 @@ dependencies {
     implementation(libs.stripe)
     implementation(libs.stripe.android)
 
-    implementation(project(":stripe"))
     implementation(libs.gson)
     implementation(libs.gson.converter)
     implementation(libs.retrofit)
