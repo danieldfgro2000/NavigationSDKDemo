@@ -1,4 +1,4 @@
-package com.example.navigationsdkdemo.presentation.widget
+package com.example.navigationsdkdemo.presentation.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -91,7 +91,9 @@ fun PaymentDialog(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.surfaceContainer
                 ),
-                onClick = { onDismiss() }) {
+                onClick = {
+                    onDismiss()
+                }) {
                 Text(
                     color = MaterialTheme.colorScheme.onSurface,
                     text = dismissText

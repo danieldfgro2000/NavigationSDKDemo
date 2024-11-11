@@ -23,10 +23,10 @@ import androidx.lifecycle.Lifecycle.Event.ON_STOP
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.NavController
 import com.example.navigationsdkdemo.data.initNavigator
-import com.example.navigationsdkdemo.presentation.widget.PaymentDialog
-import com.example.navigationsdkdemo.presentation.widget.PermissionsNotGranted
-import com.example.navigationsdkdemo.presentation.widget.TopBarCustom
-import com.example.navigationsdkdemo.presentation.widget.navigateToPlace
+import com.example.navigationsdkdemo.presentation.composables.PaymentDialog
+import com.example.navigationsdkdemo.presentation.composables.PermissionsNotGranted
+import com.example.navigationsdkdemo.presentation.composables.TopBarCustom
+import com.example.navigationsdkdemo.presentation.composables.navigateToPlace
 import com.example.navigationsdkdemo.util.PermissionRequester
 import com.google.android.libraries.navigation.NavigationView
 import com.google.android.libraries.navigation.Navigator

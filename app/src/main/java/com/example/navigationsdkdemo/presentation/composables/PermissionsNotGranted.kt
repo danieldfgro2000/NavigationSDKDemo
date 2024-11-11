@@ -1,4 +1,4 @@
-package com.example.navigationsdkdemo.presentation.widget
+package com.example.navigationsdkdemo.presentation.composables
 
 import android.content.Intent
 import android.net.Uri

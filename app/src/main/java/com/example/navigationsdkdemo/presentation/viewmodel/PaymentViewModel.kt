@@ -28,4 +28,8 @@ class PaymentViewModel: ViewModel() {
             _showProgress.value = false
         }
     }
+
+    fun clearPayment() {
+        _descriptionText.value = "Payment description goes here"
+    }
 }

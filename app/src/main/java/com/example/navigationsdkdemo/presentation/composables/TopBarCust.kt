@@ -1,4 +1,4 @@
-package com.example.navigationsdkdemo.presentation.widget
+package com.example.navigationsdkdemo.presentation.composables
 
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.ExperimentalMaterial3Api
