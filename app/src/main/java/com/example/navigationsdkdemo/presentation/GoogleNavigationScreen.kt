@@ -21,7 +21,6 @@ import androidx.lifecycle.Lifecycle.Event.ON_RESUME
 import androidx.lifecycle.Lifecycle.Event.ON_START
 import androidx.lifecycle.Lifecycle.Event.ON_STOP
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.navigation.NavController
 import com.example.navigationsdkdemo.data.initNavigator
 import com.example.navigationsdkdemo.presentation.composables.PaymentDialog
 import com.example.navigationsdkdemo.presentation.composables.PermissionsNotGranted
@@ -34,7 +33,7 @@ import com.google.android.libraries.navigation.RoutingOptions
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GoogleNavigationScreen(navController: NavController) {
+fun GoogleNavigationScreen() {
     val isNavigationPermissionGranted = remember { mutableStateOf(false) }
 
 
